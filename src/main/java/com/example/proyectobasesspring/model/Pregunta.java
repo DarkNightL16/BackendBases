@@ -26,22 +26,19 @@ public class Pregunta {
     @JoinColumn(name = "TEMAS_ID_TEMA", nullable = false)
     private Tema temasIdTema;
 
-    @Column(name = "PROFESORES_USUARIOS_ID_USUARIO", nullable = false, length = 10)
-    private String profesoresUsuariosIdUsuario;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
-    @JoinColumn(name = "TIPOS_PREGUNTAS_TIPO", nullable = false)
-    private TiposPregunta tiposPreguntasTipo;
+    @JoinColumn(name = "ID_TIPO_PREGUNTA", nullable = false)
+    private TiposPregunta idTipoPregunta;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_PROFESOR", nullable = false)
-    private Profesore idProfesor;
+    private Profesor idProfesor;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.RESTRICT)
-    @JoinColumn(name = "ID_PREGUNTA_COMPUESTA", nullable = false)
+    @JoinColumn(name = "ID_PREGUNTA_COMPUESTA")
     private Pregunta idPreguntaCompuesta;
 
 }

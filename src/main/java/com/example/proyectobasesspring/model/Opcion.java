@@ -10,7 +10,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Setter
 @Entity
 @Table(name = "OPCIONES")
-public class Opcione {
+public class Opcion {
     @Id
     @Column(name = "ID_OPCION", nullable = false)
     private Long id;
@@ -18,7 +18,7 @@ public class Opcione {
     @Column(name = "TEXTO", nullable = false, length = 500)
     private String texto;
 
-    @Column(name = "RESPUESTA", length = 700)
+    @Column(name = "RESPUESTA", nullable = false, length = 700)
     private String respuesta;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -26,9 +26,9 @@ public class Opcione {
     @JoinColumn(name = "PREGUNTAS_ID_PREGUNTA", nullable = false)
     private Pregunta preguntasIdPregunta;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.RESTRICT)
-    @JoinColumn(name = "OPCIONES_ID_OPCION", nullable = false)
-    private Opcione opcionesIdOpcion;
+    @JoinColumn(name = "OPCIONES_ID_OPCION")
+    private Opcion opcionesIdOpcion;
 
 }

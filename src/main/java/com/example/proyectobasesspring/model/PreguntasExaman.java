@@ -18,7 +18,7 @@ public class PreguntasExaman {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "EXAMENES_ID_EXAMEN", nullable = false)
-    private Examene examenesIdExamen;
+    private Examen examenesIdExamen;
 
     @MapsId("preguntasIdPregunta")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

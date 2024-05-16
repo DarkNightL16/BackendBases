@@ -23,10 +23,7 @@ public class Usuario {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
-    @JoinColumn(name = "TIPO_USUARIO_DESCRIPCION", nullable = false)
-    private TipoUsuario tipoUsuarioDescripcion;
-
-    @Column(name = "TIPO_USUARIO", nullable = false, length = 50)
-    private String tipoUsuario;
+    @JoinColumn(name = "ID_TIPO_USUARIO", nullable = false)
+    private TipoUsuario idTipoUsuario;
 
 }

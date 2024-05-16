@@ -9,21 +9,21 @@ import org.hibernate.annotations.OnDeleteAction;
 @Getter
 @Setter
 @Entity
-@Table(name = "UNIDADES")
-public class Unidade {
+@Table(name = "PLANES_ESTUDIO")
+public class PlanEstudio {
     @Id
-    @Column(name = "ID_UNIDAD", nullable = false)
+    @Column(name = "ID_PLAN", nullable = false)
     private Long id;
 
-    @Column(name = "NOMBRE", nullable = false, length = 50)
+    @Column(name = "NOMBRE", nullable = false, length = 40)
     private String nombre;
 
     @Column(name = "DESCRIPCION", nullable = false, length = 200)
     private String descripcion;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
-    @JoinColumn(name = "PLANES_ESTUDIO_ID_PLAN", nullable = false)
-    private PlanesEstudio planesEstudioIdPlan;
+    @JoinColumn(name = "CURSOS_ID_CURSO", nullable = false)
+    private Curso cursosIdCurso;
 
 }

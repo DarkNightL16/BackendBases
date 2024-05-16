@@ -13,8 +13,10 @@ import lombok.Setter;
 @Table(name = "TIPO_USUARIO")
 public class TipoUsuario {
     @Id
+    @Column(name = "ID_TIPO_USUARIO", nullable = false)
+    private Long id;
+
     @Column(name = "DESCRIPCION", nullable = false, length = 50)
     private String descripcion;
 
-    //TODO [JPA Buddy] generate columns from DB
 }

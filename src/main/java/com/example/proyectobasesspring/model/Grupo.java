@@ -21,6 +21,6 @@ public class Grupo {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "PROFESORES_USUARIOS_ID_USUARIO", nullable = false)
-    private Profesore profesoresUsuariosIdUsuario;
+    private Profesor profesoresUsuariosIdUsuario;
 
 }

@@ -24,6 +24,6 @@ public class Contenido {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "UNIDADES_ID_UNIDAD", nullable = false)
-    private Unidade unidadesIdUnidad;
+    private Unidad unidadesIdUnidad;
 
 }

@@ -10,7 +10,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Setter
 @Entity
 @Table(name = "PROFESORES")
-public class Profesore {
+public class Profesor {
     @Id
     @Column(name = "USUARIOS_ID_USUARIO", nullable = false, length = 10)
     private String usuariosIdUsuario;
