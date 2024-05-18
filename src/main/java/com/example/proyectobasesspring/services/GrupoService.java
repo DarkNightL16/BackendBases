@@ -1,7 +1,6 @@
 package com.example.proyectobasesspring.services;
 
 import com.example.proyectobasesspring.model.Grupo;
-import com.example.proyectobasesspring.model.Usuario;
 
 import java.util.List;
 import java.util.Optional;

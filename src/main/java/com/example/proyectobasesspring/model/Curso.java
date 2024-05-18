@@ -1,13 +1,11 @@
 package com.example.proyectobasesspring.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -15,6 +13,8 @@ import java.time.LocalDate;
 @Table(name = "CURSOS")
 public class Curso {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "curso_seq_gen")
+    @SequenceGenerator(name = "curso_seq_gen", sequenceName = "curso_seq", allocationSize = 1, initialValue = 26)
     @Column(name = "ID_CURSO", nullable = false)
     private Long id;
 

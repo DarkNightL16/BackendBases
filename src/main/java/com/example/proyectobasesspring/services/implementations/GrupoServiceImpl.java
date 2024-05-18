@@ -1,6 +1,7 @@
 package com.example.proyectobasesspring.services.implementations;
 
 import com.example.proyectobasesspring.model.Grupo;
+import com.example.proyectobasesspring.repositories.GrupoRepository;
 import com.example.proyectobasesspring.services.GrupoService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,20 +12,18 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class GrupoServiceImpl implements GrupoService {
-    private GrupoService grupoService;
+    private GrupoRepository grupoRepository;
 
     @Override
-    public List<Grupo> listarGrupos() {
-        return grupoService.listarGrupos();
-    }
+    public List<Grupo> listarGrupos() {return grupoRepository.findAll();}
 
     @Override
     public Grupo guardar(Grupo grupo) {
-        return grupoService.guardar(grupo);
+        return grupoRepository.save(grupo);
     }
 
     @Override
     public Optional<Grupo> buscarPorId(Long id) {
-        return grupoService.buscarPorId(id);
+        return grupoRepository.findById(id);
     }
 }

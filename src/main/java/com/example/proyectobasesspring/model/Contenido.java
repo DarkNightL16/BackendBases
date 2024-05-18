@@ -1,5 +1,6 @@
 package com.example.proyectobasesspring.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +13,8 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = "CONTENIDO")
 public class Contenido {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contenido_seq_gen")
+    @SequenceGenerator(name = "contenido_seq_gen", sequenceName = "contenido_seq", allocationSize = 1, initialValue = 26)
     @Column(name = "ID_CONTENIDO", nullable = false)
     private Long id;
 
@@ -24,6 +27,7 @@ public class Contenido {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "UNIDADES_ID_UNIDAD", nullable = false)
+    @JsonIgnoreProperties("planEstudioIdPlan")
     private Unidad unidadesIdUnidad;
 
 }

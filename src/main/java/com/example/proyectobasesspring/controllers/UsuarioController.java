@@ -1,6 +1,7 @@
 package com.example.proyectobasesspring.controllers;
 
 import com.example.proyectobasesspring.model.Estudiante;
+import com.example.proyectobasesspring.model.Grupo;
 import com.example.proyectobasesspring.model.Profesor;
 import com.example.proyectobasesspring.model.Usuario;
 import com.example.proyectobasesspring.services.implementations.*;
@@ -61,6 +62,20 @@ public class UsuarioController {
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al crear el usuario");
+        }
+    }
+
+    @PostMapping({"/grupos"})
+    public ResponseEntity<?> crearGrupo(@RequestBody Map<String, Object> userData) {
+        Grupo grupo = new Grupo();
+        grupo.setId((Long) userData.get("id"));
+        grupo.setNombreGrupo((String) userData.get("nombreGrupo"));
+        try{
+            grupo.setProfesoresUsuariosIdUsuario(profesorService.buscarPorId((String) userData.get("idProfesor")).get());
+            Grupo grupoCreado = grupoService.guardar(grupo);
+            return ResponseEntity.ok().body(grupoCreado);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 }

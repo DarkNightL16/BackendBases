@@ -1,5 +1,6 @@
 package com.example.proyectobasesspring.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +13,8 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = "EXAMENES")
 public class Examen {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "examen_seq_gen")
+    @SequenceGenerator(name = "examen_seq_gen", sequenceName = "examen_seq", allocationSize = 1, initialValue = 26)
     @Column(name = "ID_EXAMEN", nullable = false)
     private Long id;
 
@@ -22,7 +25,10 @@ public class Examen {
     private String descripcion;
 
     @Column(name = "CANTIDAD_PREGUNTAS", nullable = false)
-    private Long cantidadPreguntas;
+    private Long cantidadPreguntasTotales;
+
+    @Column(name = "CANTIDAD_PREGUNTAS_ESTUDIANTE")
+    private Long cantidadPreguntasEstudiante;
 
     @Column(name = "DURACION", nullable = false)
     private Long duracion;
@@ -41,17 +47,20 @@ public class Examen {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
-    @JoinColumn(name = "TEMAS_ID_TEMA", nullable = false)
-    private Tema temasIdTema;
+    @JoinColumn(name = "ID_CONTENIDO", nullable = false)
+    @JsonIgnoreProperties("unidadesIdUnidad")
+    private Contenido idContenido;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "PROFESORES_USUARIOS_ID_USUARIO", nullable = false)
+    @JsonIgnoreProperties("usuarios")
     private Profesor profesoresUsuariosIdUsuario;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "GRUPOS_ID_GRUPO", nullable = false)
+    @JsonIgnoreProperties("profesoresUsuariosIdUsuario")
     private Grupo gruposIdGrupo;
 
 }

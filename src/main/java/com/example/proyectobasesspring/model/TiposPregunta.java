@@ -1,9 +1,6 @@
 package com.example.proyectobasesspring.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,6 +10,8 @@ import lombok.Setter;
 @Table(name = "TIPOS_PREGUNTAS")
 public class TiposPregunta {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tipos_pregunta_seq_gen")
+    @SequenceGenerator(name = "tipos_pregunta_seq_gen", sequenceName = "tipos_pregunta_seq", allocationSize = 1, initialValue = 5)
     @Column(name = "ID_TIPO_PREGUNTA", nullable = false)
     private Long id;
 
