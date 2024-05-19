@@ -9,4 +9,6 @@ public interface ProfesorService {
     List<Profesor> listarUsuarios();
     Profesor guardar(Profesor profesor);
     Optional<Profesor> buscarPorId(String id);
+    public void eliminarPorId(String id);
+
 }

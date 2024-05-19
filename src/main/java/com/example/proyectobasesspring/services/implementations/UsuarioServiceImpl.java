@@ -30,4 +30,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     public Optional<Usuario> buscarPorId(String id) {
         return usuarioRepository.findById(id);
     }
+
+    @Override
+    public void eliminarPorId(String id) { usuarioRepository.deleteById(id);}
 }

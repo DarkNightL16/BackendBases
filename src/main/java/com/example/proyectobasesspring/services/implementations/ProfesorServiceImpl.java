@@ -29,4 +29,7 @@ public class ProfesorServiceImpl implements ProfesorService {
     public Optional<Profesor> buscarPorId(String id) {
         return profesorRepository.findById(id);
     }
+
+    @Override
+    public void eliminarPorId(String id) { profesorRepository.deleteById(id); }
 }

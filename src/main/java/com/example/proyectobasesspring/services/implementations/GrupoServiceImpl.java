@@ -26,4 +26,9 @@ public class GrupoServiceImpl implements GrupoService {
     public Optional<Grupo> buscarPorId(Long id) {
         return grupoRepository.findById(id);
     }
+
+    @Override
+    public void eliminarPorId(Long id) { grupoRepository.deleteById(id);
+
+    }
 }

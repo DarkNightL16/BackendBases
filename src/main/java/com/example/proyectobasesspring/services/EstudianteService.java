@@ -9,4 +9,5 @@ public interface EstudianteService {
     List<Estudiante> listarUsuarios();
     Estudiante guardar(Estudiante estudiante);
     Optional<Estudiante> buscarPorId(String id);
+    public void eliminarPorId(String id);
 }

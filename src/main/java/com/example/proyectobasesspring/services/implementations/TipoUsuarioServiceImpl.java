@@ -28,4 +28,7 @@ public class TipoUsuarioServiceImpl implements TipoUsuarioService {
     public Optional<TipoUsuario> buscarPorId(Long id) {
         return tipoUsuarioRepository.findById(id);
     }
+
+    @Override
+    public void eliminar(Long id) { tipoUsuarioRepository.deleteById(id);}
 }

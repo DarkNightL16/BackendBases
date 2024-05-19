@@ -6,10 +6,7 @@ import com.example.proyectobasesspring.model.TiposPregunta;
 import com.example.proyectobasesspring.services.implementations.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -96,4 +93,25 @@ public class ExamenesController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @GetMapping("/listarExamenes")
+    public ResponseEntity<?> listarExamenes(){
+        try {
+            return ResponseEntity.ok().body(examenService.buscarTodos());
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping({"/elminarExamen"})
+    public ResponseEntity<?> eliminarExamen(@RequestBody Map<Long, Object> userData){
+        Long idExamen = Long.parseLong((String)userData.get("idExamen"));
+        try{
+            examenService.eliminar(idExamen);
+            return ResponseEntity.ok().body("Examen eliminado");
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
 }

@@ -28,4 +28,7 @@ public class EstudianteServiceImpl implements EstudianteService {
     public Optional<Estudiante> buscarPorId(String id) {
         return estudianteRepository.findById(id);
     }
+
+    @Override
+    public void eliminarPorId(String id) { estudianteRepository.deleteById(id);}
 }

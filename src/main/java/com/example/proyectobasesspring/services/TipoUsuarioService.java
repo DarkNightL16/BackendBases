@@ -9,4 +9,6 @@ public interface TipoUsuarioService {
     List<TipoUsuario> listarTiposUsuarios();
     TipoUsuario guardar(TipoUsuario tipoUsuario);
     Optional<TipoUsuario> buscarPorId(Long id);
+    public void eliminar(Long id);
+
 }

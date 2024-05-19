@@ -9,4 +9,6 @@ public interface GrupoService {
     List<Grupo> listarGrupos();
     Grupo guardar(Grupo grupo);
     Optional<Grupo> buscarPorId(Long id);
+    public void eliminarPorId(Long id);
+
 }
