@@ -28,7 +28,6 @@ public class GrupoServiceImpl implements GrupoService {
     }
 
     @Override
-    public void eliminarPorId(Long id) { grupoRepository.deleteById(id);
+    public void eliminarPorId(Long id) { grupoRepository.deleteById(id);}
 
-    }
 }

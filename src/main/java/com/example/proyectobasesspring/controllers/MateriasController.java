@@ -48,8 +48,7 @@ public class MateriasController {
         }
     }
 
-    @PostMapping
-    @RequestMapping("/planesEstudio")
+    @PostMapping("/planesEstudio")
     public ResponseEntity<?> registrarPlanEstudio(@RequestBody Map<String, Object> planEstudioData) {
         PlanEstudio planEstudio = new PlanEstudio();
         planEstudio.setNombre((String) planEstudioData.get("nombre"));
@@ -64,8 +63,7 @@ public class MateriasController {
         }
     }
 
-    @PostMapping
-    @RequestMapping("/unidades")
+    @PostMapping("/unidades")
     public ResponseEntity<?> registrarUnidades(@RequestBody Map<String, Object> unidadesData) {
         Unidad unidad = new Unidad();
         unidad.setNombre((String) unidadesData.get("nombre"));
@@ -79,8 +77,7 @@ public class MateriasController {
         }
     }
 
-    @PostMapping
-    @RequestMapping("/contenidos")
+    @PostMapping("/contenidos")
     public ResponseEntity<?> registrarContenido(@RequestBody Map<String, Object> contenidoData) {
         Contenido contenido = new Contenido();
         contenido.setNombre((String) contenidoData.get("nombre"));

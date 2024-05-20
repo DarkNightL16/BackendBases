@@ -21,11 +21,11 @@ public class PreguntasEstudiante {
             @JoinColumn(name = "PREGUNTAS_EX_ID_EXAMEN", referencedColumnName = "EXAMENES_ID_EXAMEN", nullable = false)
     })
     @OnDelete(action = OnDeleteAction.RESTRICT)
-    private PreguntasExaman preguntasExamen;
+    private PreguntasExamen preguntasExamen;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
-    @JoinColumn(name = "\"ID_PRESENTACIÓN\"", nullable = false)
+    @JoinColumn(name = "ID_PRESENTACION", nullable = false)
     private ExamenPresentado idPresentación;
 
 }
