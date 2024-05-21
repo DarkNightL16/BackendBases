@@ -25,6 +25,9 @@ public class ExamenesController {
     private final EstudianteServiceImpl estudianteService;
     private final ExamenPresentadoServiceImpl examenPresentadoService;
     private final OpcionServiceImpl opcionService;
+    private final PreguntaExamenServiceImpl preguntaExamenService;
+    private final PreguntaEstudianteServiceImpl preguntaEstudianteService;
+    private final RespuestaEstudianteServiceImpl respuestaEstudianteService;
 
     @PostMapping
     public ResponseEntity<?> registrarExamen(@RequestBody Map<String, Object> cursoData) {
@@ -250,4 +253,105 @@ public class ExamenesController {
         return ResponseEntity.ok().body("Opción eliminada");
     }
 
+    @PostMapping("/preguntasExamen")
+    public ResponseEntity<?> registrarPreguntasExamen(@RequestBody Map<String, Object> preguntasExamenData) {
+        PreguntaExamen preguntaExamen = new PreguntaExamen();
+
+        Long id_examen = Long.parseLong((String)preguntasExamenData.get("id_examen"));
+        preguntaExamen.setExamenesIdExamen(examenService.buscarPorId(id_examen).get());
+
+        Long id_pregunta = Long.parseLong((String)preguntasExamenData.get("id_pregunta"));
+        preguntaExamen.setPreguntasIdPregunta(preguntaService.buscarPorId(id_pregunta).get());
+
+        Long porcentajePregunta = Long.parseLong((String)preguntasExamenData.get("porcentajePregunta"));
+        preguntaExamen.setPorcentajePregunta(porcentajePregunta);
+
+        try {
+            return ResponseEntity.ok().body(preguntaExamenService.guardar(preguntaExamen));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/listarPreguntasExamen")
+    public ResponseEntity<?> listarPreguntasExamen() {
+        return ResponseEntity.ok().body(preguntaExamenService.buscarTodos());
+    }
+
+    @DeleteMapping("/eliminarPreguntasExamen")
+    public ResponseEntity<?> eliminarPreguntasExamen(@RequestBody Map<String, Object> preguntasExamenData) {
+        Long id_pregunta_examen = Long.parseLong((String)preguntasExamenData.get("id_pregunta_examen"));
+        try{
+            preguntaExamenService.eliminarPorId(id_pregunta_examen);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+        return ResponseEntity.ok().body("Pregunta Examen eliminada");
+    }
+
+    @PostMapping("/preguntasEstudiante")
+    public ResponseEntity<?> registrarPreguntasEstudiante(@RequestBody Map<String, Object> preguntasEstudianteData) {
+        PreguntaEstudiante preguntaEstudiante = new PreguntaEstudiante();
+
+        Long id_presentacion = Long.parseLong((String)preguntasEstudianteData.get("id_presentacion"));
+        preguntaEstudiante.setIdPresentacion(examenPresentadoService.buscarPorId(id_presentacion).get());
+
+        Long id_pregunta_examen = Long.parseLong((String)preguntasEstudianteData.get("id_pregunta_examen"));
+        preguntaEstudiante.setIdPreguntaExamen(preguntaExamenService.buscarPorId(id_pregunta_examen).get());
+
+        try {
+            return ResponseEntity.ok().body(preguntaEstudianteService.guardar(preguntaEstudiante));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/listarPreguntasEstudiante")
+    public ResponseEntity<?> listarPreguntasEstudiante() {
+        return ResponseEntity.ok().body(preguntaEstudianteService.buscarTodos());
+    }
+
+    @DeleteMapping("/eliminarPreguntasEstudiante")
+    public ResponseEntity<?> eliminarPreguntasEstudiante(@RequestBody Map<String, Object> preguntasEstudianteData) {
+        Long id_pregunta_estudiante = Long.parseLong((String) preguntasEstudianteData.get("id_pregunta_estudiante"));
+        try {
+            preguntaEstudianteService.eliminarPorId(id_pregunta_estudiante);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+        return ResponseEntity.ok().body("Pregunta Estudiante eliminada");
+    }
+
+    @PostMapping("/respuestasEstudiante")
+    public ResponseEntity<?> registrarRespuestasEstudiante(@RequestBody Map<String, Object> respuestasEstudianteData) {
+        RespuestaEstudiante respuestaEstudiante = new RespuestaEstudiante();
+
+        respuestaEstudiante.setTexto((String) respuestasEstudianteData.get("texto"));
+        respuestaEstudiante.setRespuesta((String) respuestasEstudianteData.get("respuesta"));
+
+        Long id_pregunta_estudiante = Long.parseLong((String) respuestasEstudianteData.get("id_pregunta_estudiante"));
+        respuestaEstudiante.setIdPreguntaEstudiante(preguntaEstudianteService.buscarPorId(id_pregunta_estudiante).get());
+
+        try {
+            return ResponseEntity.ok().body(respuestaEstudianteService.guardar(respuestaEstudiante));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/listarRespuestasEstudiante")
+    public ResponseEntity<?> listarRespuestasEstudiante() {
+        return ResponseEntity.ok().body(respuestaEstudianteService.buscarTodos());
+    }
+
+    @DeleteMapping("/eliminarRespuestasEstudiante")
+    public ResponseEntity<?> eliminarRespuestasEstudiante(@RequestBody Map<String, Object> respuestasEstudianteData) {
+        Long id_respuesta_estudiante = Long.parseLong((String) respuestasEstudianteData.get("id_respuesta_estudiante"));
+        try {
+            respuestaEstudianteService.eliminarPorId(id_respuesta_estudiante);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+        return ResponseEntity.ok().body("Pregunta Estudiante eliminada");
+    }
 }

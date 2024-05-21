@@ -1,5 +1,6 @@
 package com.example.proyectobasesspring.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +19,7 @@ public class GrupoCurso {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "GRUPOS_ID_GRUPO", nullable = false)
+    @JsonIgnoreProperties("profesoresUsuariosIdUsuario")
     private Grupo gruposIdGrupo;
 
     @MapsId("cursosIdCurso")

@@ -1,13 +1,7 @@
 package com.example.proyectobasesspring.controllers;
 
-import com.example.proyectobasesspring.model.Contenido;
-import com.example.proyectobasesspring.model.Curso;
-import com.example.proyectobasesspring.model.PlanEstudio;
-import com.example.proyectobasesspring.model.Unidad;
-import com.example.proyectobasesspring.services.implementations.ContenidoServiceImpl;
-import com.example.proyectobasesspring.services.implementations.CursoServiceImpl;
-import com.example.proyectobasesspring.services.implementations.PlanEstudioServiceImpl;
-import com.example.proyectobasesspring.services.implementations.UnidadServiceImpl;
+import com.example.proyectobasesspring.model.*;
+import com.example.proyectobasesspring.services.implementations.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +21,8 @@ public class MateriasController {
     private final PlanEstudioServiceImpl planEstudioService;
     private final UnidadServiceImpl unidadService;
     private final ContenidoServiceImpl contenidoService;
+    private final GrupoCursoServiceImpl grupoCursoService;
+    private final GrupoServiceImpl grupoService;
 
     @PostMapping
     public ResponseEntity<?> registrarCurso(@RequestBody Map<String, Object> cursoData) {
@@ -87,6 +83,28 @@ public class MateriasController {
 
         try {
             return ResponseEntity.ok().body(contenidoService.guardar(contenido));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/grupoCurso")
+    public ResponseEntity<?> registrarGrupoCurso(@RequestBody Map<String, Object> grupoCursoData) {
+        GrupoCurso grupoCurso = new GrupoCurso();
+        GrupoCursoId grupoCursoId = new GrupoCursoId();
+
+        Long id_grupo = Long.parseLong((String)grupoCursoData.get("id_grupo"));
+        Long id_curso = Long.parseLong((String)grupoCursoData.get("id_curso"));
+
+        grupoCursoId.setGruposIdGrupo(id_grupo);
+        grupoCursoId.setCursosIdCurso(id_curso);
+
+        grupoCurso.setId(grupoCursoId);
+
+        try {
+            grupoCurso.setGruposIdGrupo(grupoService.buscarPorId(id_grupo).get());
+            grupoCurso.setCursosIdCurso(cursoService.buscarPorId(id_curso).get());
+            return ResponseEntity.ok().body(grupoCursoService.guardar(grupoCurso));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
