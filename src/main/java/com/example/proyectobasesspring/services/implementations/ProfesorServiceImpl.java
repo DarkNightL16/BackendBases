@@ -16,7 +16,7 @@ public class ProfesorServiceImpl implements ProfesorService {
 
 
     @Override
-    public List<Profesor> listarUsuarios() {
+    public List<Profesor> listarProfesores() {
         return profesorRepository.findAll();
     }
 

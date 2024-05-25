@@ -1,5 +1,6 @@
 package com.example.proyectobasesspring.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,6 +20,7 @@ public class Estudiante {
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "USUARIOS_ID_USUARIO", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Usuario usuarios;
 
     @Column(name = "NOMBRE", nullable = false, length = 40)
@@ -30,6 +32,7 @@ public class Estudiante {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "GRUPOS_ID_GRUPO", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Grupo gruposIdGrupo;
 
 }

@@ -1,5 +1,6 @@
 package com.example.proyectobasesspring.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,6 +20,7 @@ public class Profesor {
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "USUARIOS_ID_USUARIO", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Usuario usuarios;
 
     @Column(name = "NOMBRE", nullable = false, length = 40)

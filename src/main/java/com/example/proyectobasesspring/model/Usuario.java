@@ -1,5 +1,7 @@
 package com.example.proyectobasesspring.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,6 +26,7 @@ public class Usuario {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_TIPO_USUARIO", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private TipoUsuario idTipoUsuario;
 
 }

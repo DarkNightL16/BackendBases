@@ -76,6 +76,24 @@ public class UsuarioController {
         }
     }
 
+    @GetMapping("/listarGruposPorProfesor")
+    public ResponseEntity<?> listarGruposPorProfesor(@RequestBody Map<String, Object> id_profesor) {
+        try {
+            return ResponseEntity.ok().body(grupoService.listarGruposPorProfesor(id_profesor.get("id_profesor").toString()));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/listarGrupos")
+    public ResponseEntity<?> listarGrupos() {
+        try {
+            return ResponseEntity.ok().body(grupoService.listarGrupos());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     @GetMapping("/listarUsuarios")
     public ResponseEntity<?> listarUsuarios() {
         try {
@@ -96,4 +114,58 @@ public class UsuarioController {
         }
     }
 
+    @GetMapping("/listarEstudiantes")
+    public ResponseEntity<?> listarEstudiantes() {
+        try {
+            return ResponseEntity.ok().body(estudianteService.listarEstudiantes());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/listarProfesores")
+    public ResponseEntity<?> listarProfesores() {
+        try {
+            return ResponseEntity.ok().body(profesorService.listarProfesores());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/buscarUsuarioPorId")
+    public ResponseEntity<?> buscarUsuarioPorId(@RequestBody Map<String, Object> userData) {
+        try {
+            return ResponseEntity.ok().body(usuarioService.buscarPorId(userData.get("id_usuario").toString()));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/buscarEstudiantePorId")
+    public ResponseEntity<?> buscarEstudiantePorId(@RequestBody Map<String, Object> userData) {
+        try {
+            return ResponseEntity.ok().body(estudianteService.buscarPorId(userData.get("id_estudiante").toString()));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/buscarProfesorPorId")
+    public ResponseEntity<?> buscarProfesorPorId(@RequestBody Map<String, Object> userData) {
+        try {
+            return ResponseEntity.ok().body(profesorService.buscarPorId(userData.get("id_profesor").toString()));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/buscarGrupoPorId")
+    public ResponseEntity<?> buscarGrupoPorId(@RequestBody Map<String, Object> grupoData) {
+        Long id_grupo = Long.parseLong((String) grupoData.get("id_grupo"));
+        try {
+            return ResponseEntity.ok().body(grupoService.buscarPorId(id_grupo));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

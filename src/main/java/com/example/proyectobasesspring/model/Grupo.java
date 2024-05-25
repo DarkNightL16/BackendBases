@@ -1,5 +1,6 @@
 package com.example.proyectobasesspring.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +22,7 @@ public class Grupo {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "PROFESORES_USUARIOS_ID_USUARIO", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Profesor profesoresUsuariosIdUsuario;
 
 }

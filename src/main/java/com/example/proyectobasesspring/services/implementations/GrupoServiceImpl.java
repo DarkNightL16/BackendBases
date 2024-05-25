@@ -15,7 +15,9 @@ public class GrupoServiceImpl implements GrupoService {
     private GrupoRepository grupoRepository;
 
     @Override
-    public List<Grupo> listarGrupos() {return grupoRepository.findAll();}
+    public List<Grupo> listarGrupos() {
+        return grupoRepository.findAll();
+    }
 
     @Override
     public Grupo guardar(Grupo grupo) {
@@ -28,6 +30,12 @@ public class GrupoServiceImpl implements GrupoService {
     }
 
     @Override
-    public void eliminarPorId(Long id) { grupoRepository.deleteById(id);}
+    public void eliminarPorId(Long id) {
+        grupoRepository.deleteById(id);
+    }
 
+    @Override
+    public List<Grupo> listarGruposPorProfesor(String id_profesor) {
+        return grupoRepository.listarGruposPorProfesor(id_profesor);
+    }
 }

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface EstudianteService {
-    List<Estudiante> listarUsuarios();
+    List<Estudiante> listarEstudiantes();
     Estudiante guardar(Estudiante estudiante);
     Optional<Estudiante> buscarPorId(String id);
     public void eliminarPorId(String id);

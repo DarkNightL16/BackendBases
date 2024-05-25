@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProfesorService {
-    List<Profesor> listarUsuarios();
+    List<Profesor> listarProfesores();
     Profesor guardar(Profesor profesor);
     Optional<Profesor> buscarPorId(String id);
     public void eliminarPorId(String id);
