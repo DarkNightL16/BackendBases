@@ -1,9 +1,6 @@
 package com.example.proyectobasesspring.controllers;
 
-import com.example.proyectobasesspring.model.Estudiante;
-import com.example.proyectobasesspring.model.Grupo;
-import com.example.proyectobasesspring.model.Profesor;
-import com.example.proyectobasesspring.model.Usuario;
+import com.example.proyectobasesspring.model.*;
 import com.example.proyectobasesspring.services.implementations.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,6 +18,7 @@ public class UsuarioController {
     private final GrupoServiceImpl grupoService;
     private final EstudianteServiceImpl estudianteService;
     private final ProfesorServiceImpl profesorService;
+    private final GrupoEstudianteServiceImpl grupoEstudianteService;
 
     @PostMapping
     public ResponseEntity<?> registrarUsuario(@RequestBody Map<String, Object> userData) {
@@ -38,7 +36,6 @@ public class UsuarioController {
                 estudiante.setNombre((String) userData.get("nombre"));
                 estudiante.setApellido((String) userData.get("apellido"));
                 Long idGrupo = Long.parseLong((String) userData.get("idGrupo"));
-                estudiante.setGruposIdGrupo(grupoService.buscarPorId(idGrupo).get());
                 try{
                     estudianteService.guardar(estudiante);
                     return ResponseEntity.ok().body(usuarioGuardado);
@@ -164,6 +161,48 @@ public class UsuarioController {
         Long id_grupo = Long.parseLong((String) grupoData.get("id_grupo"));
         try {
             return ResponseEntity.ok().body(grupoService.buscarPorId(id_grupo));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PostMapping("agregarGrupoEstudiante")
+    public ResponseEntity<?> agregarGrupoEstudiante(@RequestBody Map<String, Object> grupoEstudianteData) {
+        try {
+            GrupoEstudiante grupoEstudiante = new GrupoEstudiante();
+            GrupoEstudianteId grupoEstudianteId = new GrupoEstudianteId();
+
+            Long id_grupo = Long.parseLong((String) grupoEstudianteData.get("id_grupo"));
+            String id_estudiante = (String) grupoEstudianteData.get("id_estudiante");
+
+            grupoEstudianteId.setIdGrupo(id_grupo);
+            grupoEstudianteId.setIdEstudiante(id_estudiante);
+
+            grupoEstudiante.setId(grupoEstudianteId);
+
+            grupoEstudiante.setIdEstudiante(estudianteService.buscarPorId(id_estudiante).get());
+            grupoEstudiante.setIdGrupo(grupoService.buscarPorId(id_grupo).get());
+
+            return ResponseEntity.ok().body(grupoEstudianteService.guardar(grupoEstudiante));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/listarGrupoEstudiantes")
+    public ResponseEntity<?> listarGrupoEstudiantes() {
+        try {
+            return ResponseEntity.ok().body(grupoEstudianteService.buscarTodos());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/buscarGrupoEstudiantePorId")
+    public ResponseEntity<?> buscarGrupoEstudiantePorId(@RequestBody Map<String, Object> grupoEstudianteData) {
+        try {
+            String id_estudiante = (String) grupoEstudianteData.get("id_estudiante");
+            return ResponseEntity.ok().body(grupoEstudianteService.listarGruposPorEstudiante(id_estudiante));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

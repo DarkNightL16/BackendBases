@@ -5,8 +5,8 @@ import com.example.proyectobasesspring.model.GrupoCurso;
 import java.util.List;
 
 public interface GrupoCursoService {
-    public GrupoCurso guardar(GrupoCurso grupoCurso);
-    public List<GrupoCurso> buscarTodos();
-    public void eliminarPorId(GrupoCurso grupoCurso);
-    public void actualizar(GrupoCurso grupoCurso);
+    GrupoCurso guardar(GrupoCurso grupoCurso);
+    List<GrupoCurso> buscarTodos();
+    void eliminarPorId(GrupoCurso grupoCurso);
+    void actualizar(GrupoCurso grupoCurso);
 }

@@ -29,10 +29,4 @@ public class Estudiante {
     @Column(name = "APELLIDO", nullable = false, length = 40)
     private String apellido;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.RESTRICT)
-    @JoinColumn(name = "GRUPOS_ID_GRUPO", nullable = false)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Grupo gruposIdGrupo;
-
 }
