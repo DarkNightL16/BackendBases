@@ -62,6 +62,71 @@ public class UsuarioController {
         }
     }
 
+    @GetMapping("/listarUsuarios")
+    public ResponseEntity<?> listarUsuarios() {
+        try {
+            return ResponseEntity.ok().body(usuarioService.listarUsuarios());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping({"/eliminarUsuario"})
+    public ResponseEntity<?> eliminarUsuario(@RequestBody Map<String, Object> userData){
+        String idUsuario = "idUsuario";
+        try{
+            usuarioService.eliminarPorId(idUsuario);
+            return ResponseEntity.ok().body("Usuario eliminado");
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/buscarUsuarioPorId")
+    public ResponseEntity<?> buscarUsuarioPorId(@RequestBody Map<String, Object> userData) {
+        try {
+            return ResponseEntity.ok().body(usuarioService.buscarPorId(userData.get("id_usuario").toString()));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/listarEstudiantes")
+    public ResponseEntity<?> listarEstudiantes() {
+        try {
+            return ResponseEntity.ok().body(estudianteService.listarEstudiantes());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/listarProfesores")
+    public ResponseEntity<?> listarProfesores() {
+        try {
+            return ResponseEntity.ok().body(profesorService.listarProfesores());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/buscarEstudiantePorId")
+    public ResponseEntity<?> buscarEstudiantePorId(@RequestBody Map<String, Object> userData) {
+        try {
+            return ResponseEntity.ok().body(estudianteService.buscarPorId(userData.get("id_estudiante").toString()));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/buscarProfesorPorId")
+    public ResponseEntity<?> buscarProfesorPorId(@RequestBody Map<String, Object> userData) {
+        try {
+            return ResponseEntity.ok().body(profesorService.buscarPorId(userData.get("id_profesor").toString()));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     @PostMapping({"/grupos"})
     public ResponseEntity<?> crearGrupo(@RequestBody Map<String, Object> userData) {
         Grupo grupo = new Grupo();
@@ -89,71 +154,6 @@ public class UsuarioController {
     public ResponseEntity<?> listarGrupos() {
         try {
             return ResponseEntity.ok().body(grupoService.listarGrupos());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
-
-    @GetMapping("/listarUsuarios")
-    public ResponseEntity<?> listarUsuarios() {
-        try {
-            return ResponseEntity.ok().body(usuarioService.listarUsuarios());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
-
-    @DeleteMapping({"/eliminarUsuario"})
-    public ResponseEntity<?> eliminarUsuario(@RequestBody Map<String, Object> userData){
-        String idUsuario = "idUsuario";
-        try{
-            usuarioService.eliminarPorId(idUsuario);
-            return ResponseEntity.ok().body("Usuario eliminado");
-        }catch (Exception e){
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
-
-    @GetMapping("/listarEstudiantes")
-    public ResponseEntity<?> listarEstudiantes() {
-        try {
-            return ResponseEntity.ok().body(estudianteService.listarEstudiantes());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
-
-    @GetMapping("/listarProfesores")
-    public ResponseEntity<?> listarProfesores() {
-        try {
-            return ResponseEntity.ok().body(profesorService.listarProfesores());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
-
-    @GetMapping("/buscarUsuarioPorId")
-    public ResponseEntity<?> buscarUsuarioPorId(@RequestBody Map<String, Object> userData) {
-        try {
-            return ResponseEntity.ok().body(usuarioService.buscarPorId(userData.get("id_usuario").toString()));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
-
-    @GetMapping("/buscarEstudiantePorId")
-    public ResponseEntity<?> buscarEstudiantePorId(@RequestBody Map<String, Object> userData) {
-        try {
-            return ResponseEntity.ok().body(estudianteService.buscarPorId(userData.get("id_estudiante").toString()));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
-
-    @GetMapping("/buscarProfesorPorId")
-    public ResponseEntity<?> buscarProfesorPorId(@RequestBody Map<String, Object> userData) {
-        try {
-            return ResponseEntity.ok().body(profesorService.buscarPorId(userData.get("id_profesor").toString()));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

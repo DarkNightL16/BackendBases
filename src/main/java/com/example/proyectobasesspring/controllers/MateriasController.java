@@ -4,10 +4,7 @@ import com.example.proyectobasesspring.model.*;
 import com.example.proyectobasesspring.services.implementations.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -44,6 +41,36 @@ public class MateriasController {
         }
     }
 
+    @GetMapping("listarCursos")
+    public ResponseEntity<?> listarCursos() {
+        try {
+            return ResponseEntity.ok().body(cursoService.buscarTodos());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/buscarCursoPorId")
+    public ResponseEntity<?> buscarCursoPorId(@RequestBody Map<String, Object> cursoData) {
+        try {
+            Long id_curso = Long.parseLong((String)cursoData.get("id_curso"));
+            return ResponseEntity.ok().body(cursoService.buscarPorId(id_curso));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/eliminarCurso")
+    public ResponseEntity<?> eliminarCurso(@RequestBody Map<String, Object> cursoData) {
+        try {
+            Long id_curso = Long.parseLong((String)cursoData.get("id_curso"));
+            cursoService.eliminarPorId(id_curso);
+            return ResponseEntity.ok().body("Curso eliminado");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     @PostMapping("/planesEstudio")
     public ResponseEntity<?> registrarPlanEstudio(@RequestBody Map<String, Object> planEstudioData) {
         PlanEstudio planEstudio = new PlanEstudio();
@@ -54,6 +81,36 @@ public class MateriasController {
 
         try {
             return ResponseEntity.ok().body(planEstudioService.guardar(planEstudio));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("listarPlanesEstudio")
+    public ResponseEntity<?> listarPlanesEstudio() {
+        try {
+            return ResponseEntity.ok().body(planEstudioService.buscarTodos());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/buscarPlanEstudioPorId")
+    public ResponseEntity<?> buscarPlanEstudioPorId(@RequestBody Map<String, Object> planEstudioData) {
+        try {
+            Long id_plan_estudio = Long.parseLong((String)planEstudioData.get("id_plan_estudio"));
+            return ResponseEntity.ok().body(planEstudioService.buscarPorId(id_plan_estudio));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/eliminarPlanEstudio")
+    public ResponseEntity<?> eliminarPlanEstudio(@RequestBody Map<String, Object> planEstudioData) {
+        try {
+            Long id_plan_estudio = Long.parseLong((String)planEstudioData.get("id_plan_estudio"));
+            cursoService.eliminarPorId(id_plan_estudio);
+            return ResponseEntity.ok().body("Plan de Estudio eliminado");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -73,6 +130,36 @@ public class MateriasController {
         }
     }
 
+    @GetMapping("listarUnidades")
+    public ResponseEntity<?> listarUnidades() {
+        try {
+            return ResponseEntity.ok().body(unidadService.buscarTodos());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/buscarUnidadPorId")
+    public ResponseEntity<?> buscarUnidadPorId(@RequestBody Map<String, Object> unidadData) {
+        try {
+            Long id_unidad = Long.parseLong((String)unidadData.get("id_unidad"));
+            return ResponseEntity.ok().body(unidadService.buscarPorId(id_unidad));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/eliminarUnidad")
+    public ResponseEntity<?> eliminarUnidad(@RequestBody Map<String, Object> unidadData) {
+        try {
+            Long id_unidad = Long.parseLong((String)unidadData.get("id_unidad"));
+            unidadService.eliminar(id_unidad);
+            return ResponseEntity.ok().body("Unidad eliminada");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     @PostMapping("/contenidos")
     public ResponseEntity<?> registrarContenido(@RequestBody Map<String, Object> contenidoData) {
         Contenido contenido = new Contenido();
@@ -83,6 +170,36 @@ public class MateriasController {
 
         try {
             return ResponseEntity.ok().body(contenidoService.guardar(contenido));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("listarContenidos")
+    public ResponseEntity<?> listarContenidos() {
+        try {
+            return ResponseEntity.ok().body(contenidoService.buscarTodos());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/buscarContenidoPorId")
+    public ResponseEntity<?> buscarContenidoPorId(@RequestBody Map<String, Object> contenidoData) {
+        try {
+            Long id_contenido = Long.parseLong((String)contenidoData.get("id_contenido"));
+            return ResponseEntity.ok().body(contenidoService.buscarPorId(id_contenido));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/eliminarContenido")
+    public ResponseEntity<?> eliminarContenido(@RequestBody Map<String, Object> contenidoData) {
+        try {
+            Long id_contenido = Long.parseLong((String)contenidoData.get("id_contenido"));
+            contenidoService.eliminarPorId(id_contenido);
+            return ResponseEntity.ok().body("Contenido eliminada");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

@@ -27,7 +27,7 @@ public class Unidad {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "PLANES_ESTUDIO_ID_PLAN", nullable = false)
-    @JsonIgnoreProperties("cursosIdCurso")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private PlanEstudio planEstudioIdPlan;
 
 }

@@ -20,8 +20,8 @@ public class UnidadServiceImpl implements UnidadService {
     }
 
     @Override
-    public void eliminar(Unidad unidad) {
-        unidadRepository.delete(unidad);
+    public void eliminar(Long id_unidad) {
+        unidadRepository.deleteById(id_unidad);
     }
 
     @Override

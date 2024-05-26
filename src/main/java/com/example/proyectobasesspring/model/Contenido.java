@@ -27,7 +27,7 @@ public class Contenido {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "UNIDADES_ID_UNIDAD", nullable = false)
-    @JsonIgnoreProperties("planEstudioIdPlan")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Unidad unidadesIdUnidad;
 
 }
