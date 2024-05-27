@@ -36,10 +36,10 @@ public class ExamenesController {
         examen.setDescripcion((String) cursoData.get("descripcion"));
         Long cantidadPreguntas = Long.parseLong((String)cursoData.get("cantidadPreguntas"));
         examen.setCantidadPreguntasTotales(cantidadPreguntas);
-        Long cantidadPreguntasEstudiante = Long.parseLong((String)cursoData.get("cantidadPreguntasEstudiante"));
-        examen.setCantidadPreguntasEstudiante(cantidadPreguntasEstudiante);
-        Long duracion = Long.parseLong((String)cursoData.get("duracion"));
-        examen.setDuracion(duracion);
+        Long cantidadAlumno = Long.parseLong((String)cursoData.get("cantidadAlumno"));
+        examen.setCantidadPreguntasEstudiante(cantidadAlumno);
+        Long tiempoLimite = Long.parseLong((String)cursoData.get("tiempoLimite"));
+        examen.setDuracion(tiempoLimite);
         examen.setTipoExamen((String) cursoData.get("tipoExamen"));
         Long porcentajeCurso = Long.parseLong((String)cursoData.get("porcentajeCurso"));
         examen.setPorcentajeCurso(porcentajeCurso);
@@ -47,12 +47,12 @@ public class ExamenesController {
         examen.setUmbralAprobado(umbralAprobado);
         examen.setEstadoPublicacion((String) cursoData.get("estadoPublicacion"));
 
-        Long id_contenido = Long.parseLong((String)cursoData.get("id_contenido"));
-        examen.setIdContenido(contenidoService.buscarPorId(id_contenido).get());
+        Long idContenido = Long.parseLong((String)cursoData.get("idContenido"));
+        examen.setIdContenido(contenidoService.buscarPorId(idContenido).get());
         String id_profesor = (String)cursoData.get("id_profesor");
         examen.setProfesoresUsuariosIdUsuario(profesorService.buscarPorId(id_profesor).get());
-        Long id_grupo = Long.parseLong((String)cursoData.get("id_grupo"));
-        examen.setGruposIdGrupo(grupoService.buscarPorId(id_grupo).get());
+        Long profesorGrupo = Long.parseLong((String)cursoData.get("profesorGrupo"));
+        examen.setGruposIdGrupo(grupoService.buscarPorId(profesorGrupo).get());
 
         try {
             return ResponseEntity.ok().body(examenService.guardar(examen));

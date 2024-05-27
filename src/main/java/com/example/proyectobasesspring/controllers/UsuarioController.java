@@ -147,6 +147,15 @@ public class UsuarioController {
         }
     }
 
+    @GetMapping("/listarGruposPorEstudiante/{id_estudiante}")
+    public ResponseEntity<?> buscarGrupoEstudiantePorId(@PathVariable String id_estudiante) {
+        try {
+            return ResponseEntity.ok().body(grupoEstudianteService.listarGruposPorEstudiante(id_estudiante));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     @GetMapping("/listarGrupos")
     public ResponseEntity<?> listarGrupos() {
         try {
@@ -198,12 +207,4 @@ public class UsuarioController {
         }
     }
 
-    @GetMapping("/listarGruposPorEstudiante/{id_estudiante}")
-    public ResponseEntity<?> buscarGrupoEstudiantePorId(@PathVariable String id_estudiante) {
-        try {
-            return ResponseEntity.ok().body(grupoEstudianteService.listarGruposPorEstudiante(id_estudiante));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
 }
