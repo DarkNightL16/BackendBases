@@ -355,11 +355,11 @@ public class ExamenesController {
         return ResponseEntity.ok().body("Pregunta Estudiante eliminada");
     }
 
-    @GetMapping("/listarExamenesPorGrupo")
-    public ResponseEntity<?> listarExamenesPorGrupo(@RequestBody Map<String, Object> grupoData) {
+    @GetMapping("/listarExamenesPorGrupo/{id_grupo}")
+    public ResponseEntity<?> listarExamenesPorGrupo(@PathVariable String id_grupo) {
         try {
-            Long id_grupo = Long.parseLong((String)grupoData.get("id_grupo"));
-            return ResponseEntity.ok().body(examenService.buscarExamenPorGrupo(id_grupo));
+            Long id_grupoF = Long.parseLong((id_grupo));
+            return ResponseEntity.ok().body(examenService.buscarExamenPorGrupo(id_grupoF));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -385,10 +385,9 @@ public class ExamenesController {
         }
     }
 
-    @GetMapping("/buscarExamenesPorProfesor")
-    public ResponseEntity<?> buscarExamenesPorProfesor(@RequestBody Map<String, Object> profesorData) {
+    @GetMapping("/buscarExamenesPorProfesor/{id_profesor}")
+    public ResponseEntity<?> buscarExamenesPorProfesor(@PathVariable  String id_profesor) {
         try {
-            String id_profesor = (String) profesorData.get("id_profesor");
             return ResponseEntity.ok().body(examenService.buscarExamenPorProfesor(id_profesor));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
