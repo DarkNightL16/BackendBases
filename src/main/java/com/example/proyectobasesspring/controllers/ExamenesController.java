@@ -364,7 +364,7 @@ public class ExamenesController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-
+    //rrr
     @GetMapping("/buscarExamenPorId")
     public ResponseEntity<?> buscarExamenPorId(@RequestBody Map<String, Object> examenData) {
         try {
