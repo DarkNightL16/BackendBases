@@ -1,6 +1,5 @@
 package com.example.proyectobasesspring.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,13 +20,11 @@ public class PreguntaEstudiante {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_PRESENTACION", nullable = false)
-    @JsonIgnoreProperties({"estudiantesIdUsuario", "examenesIdExamen"})
     private ExamenPresentado idPresentacion;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_PREGUNTA_EXAMEN", nullable = false)
-    @JsonIgnoreProperties({"examenesIdExamen", "preguntasIdPregunta"})
     private PreguntaExamen idPreguntaExamen;
 
 }

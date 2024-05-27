@@ -18,16 +18,31 @@ public class RespuestaEstudiante {
     @Column(name = "ID_RESPUESTA_ESTUDIANTE", nullable = false)
     private Long id;
 
-    @Column(name = "TEXTO", nullable = false, length = 600)
-    private String texto;
-
     @Column(name = "RESPUESTA", nullable = false, length = 600)
     private String respuesta;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_PREGUNTA_ESTUDIANTE", nullable = false)
-    @JsonIgnoreProperties({"idPreguntaExamen", "idPresentacion"})
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private PreguntaEstudiante idPreguntaEstudiante;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.RESTRICT)
+    @JoinColumn(name = "ID_OPCION")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Opcion idOpcion;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.RESTRICT)
+    @JoinColumn(name = "ID_ESTUDIANTE")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Estudiante idEstudiante;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.RESTRICT)
+    @JoinColumn(name = "ID_PREGUNTA")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Pregunta idPregunta;
 
 }

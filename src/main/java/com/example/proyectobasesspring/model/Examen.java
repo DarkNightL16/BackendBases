@@ -25,10 +25,7 @@ public class Examen {
     private String descripcion;
 
     @Column(name = "CANTIDAD_PREGUNTAS", nullable = false)
-    private Long cantidadPreguntasTotales;
-
-    @Column(name = "CANTIDAD_PREGUNTAS_ESTUDIANTE")
-    private Long cantidadPreguntasEstudiante;
+    private Long cantidadPreguntas;
 
     @Column(name = "DURACION", nullable = false)
     private Long duracion;
@@ -62,5 +59,11 @@ public class Examen {
     @JoinColumn(name = "GRUPOS_ID_GRUPO", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Grupo gruposIdGrupo;
+
+    @Column(name = "CANTIDAD_PREGUNTAS_ESTUDIANTE")
+    private Long cantidadPreguntasEstudiante;
+
+    @Column(name = "ES_AUTOMATICO")
+    private Boolean esAutomatico;
 
 }

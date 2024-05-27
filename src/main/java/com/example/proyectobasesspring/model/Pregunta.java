@@ -1,6 +1,5 @@
 package com.example.proyectobasesspring.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -28,24 +27,31 @@ public class Pregunta {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_CONTENIDO", nullable = false)
-    @JsonIgnoreProperties("unidadesIdUnidad")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Contenido idContenido;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_TIPO_PREGUNTA", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private TiposPregunta idTipoPregunta;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_PROFESOR", nullable = false)
-    @JsonIgnoreProperties("usuarios")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Profesor idProfesor;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_PREGUNTA_COMPUESTA")
-    @JsonIgnore
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Pregunta idPreguntaCompuesta;
+
+    @Column(name = "VALOR")
+    private Long valor;
+
+    @Column(name = "CANTIDAD_SUBPREGUNTAS")
+    private Long cantidadSubpreguntas;
 
 }

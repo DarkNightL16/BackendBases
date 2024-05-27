@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 public interface GrupoEstudianteRepository extends JpaRepository<GrupoEstudiante, GrupoEstudianteId> {
-    @Query("SELECT ge FROM GrupoEstudiante ge WHERE ge.id.idEstudiante = ?1")
+    @Query("SELECT ge FROM GrupoEstudiante ge WHERE ge.idEstudiante.usuariosIdUsuario = ?1")
     List<GrupoEstudiante> listarGruposPorEstudiante(String id_estudiante);
 }

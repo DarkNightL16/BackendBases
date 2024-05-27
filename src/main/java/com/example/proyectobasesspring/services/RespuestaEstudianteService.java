@@ -1,6 +1,5 @@
 package com.example.proyectobasesspring.services;
 
-import com.example.proyectobasesspring.model.PreguntaExamen;
 import com.example.proyectobasesspring.model.RespuestaEstudiante;
 
 import java.util.List;

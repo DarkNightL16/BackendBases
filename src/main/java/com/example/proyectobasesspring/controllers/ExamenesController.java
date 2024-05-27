@@ -35,7 +35,7 @@ public class ExamenesController {
         examen.setNombre((String) cursoData.get("nombre"));
         examen.setDescripcion((String) cursoData.get("descripcion"));
         Long cantidadPreguntas = Long.parseLong((String)cursoData.get("cantidadPreguntas"));
-        examen.setCantidadPreguntasTotales(cantidadPreguntas);
+        examen.setCantidadPreguntas(cantidadPreguntas);
         Long cantidadAlumno = Long.parseLong((String)cursoData.get("cantidadAlumno"));
         examen.setCantidadPreguntasEstudiante(cantidadAlumno);
         Long tiempoLimite = Long.parseLong((String)cursoData.get("tiempoLimite"));
@@ -53,6 +53,8 @@ public class ExamenesController {
         examen.setProfesoresUsuariosIdUsuario(profesorService.buscarPorId(id_profesor).get());
         Long profesorGrupo = Long.parseLong((String)cursoData.get("profesorGrupo"));
         examen.setGruposIdGrupo(grupoService.buscarPorId(profesorGrupo).get());
+        Boolean automatico = Boolean.parseBoolean((String)cursoData.get("automatico"));
+        examen.setEsAutomatico(automatico);
 
         try {
             return ResponseEntity.ok().body(examenService.guardar(examen));
@@ -92,6 +94,10 @@ public class ExamenesController {
             Long id_pregunta_compuesta = Long.parseLong(id_pregunta_compuesta_s);
             pregunta.setIdPreguntaCompuesta(preguntaService.buscarPorId(id_pregunta_compuesta).get());
         }
+        Long valor = Long.parseLong((String)preguntaData.get("valor"));
+        pregunta.setValor(valor);
+        Long cantidadSubpreguntas = Long.parseLong((String)preguntaData.get("cantidadSubpreguntas"));
+        pregunta.setCantidadSubpreguntas(cantidadSubpreguntas);
 
         try {
             return ResponseEntity.ok().body(preguntaService.guardar(pregunta));
@@ -326,12 +332,20 @@ public class ExamenesController {
     public ResponseEntity<?> registrarRespuestasEstudiante(@RequestBody Map<String, Object> respuestasEstudianteData) {
         RespuestaEstudiante respuestaEstudiante = new RespuestaEstudiante();
 
-        respuestaEstudiante.setTexto((String) respuestasEstudianteData.get("texto"));
         respuestaEstudiante.setRespuesta((String) respuestasEstudianteData.get("respuesta"));
 
         Long id_pregunta_estudiante = Long.parseLong((String) respuestasEstudianteData.get("id_pregunta_estudiante"));
         respuestaEstudiante.setIdPreguntaEstudiante(preguntaEstudianteService.buscarPorId(id_pregunta_estudiante).get());
 
+        Long id_opcion = Long.parseLong((String) respuestasEstudianteData.get("id_opcion"));
+        respuestaEstudiante.setIdOpcion(opcionService.buscarPorId(id_opcion).get());
+
+        String id_estudiante = (String)respuestasEstudianteData.get("id_estudiante");
+        respuestaEstudiante.setIdEstudiante(estudianteService.buscarPorId(id_estudiante).get());
+
+        Long id_pregunta = Long.parseLong((String)respuestasEstudianteData.get("id_pregunta"));
+        respuestaEstudiante.setIdPregunta(preguntaService.buscarPorId(id_pregunta).get());
+        
         try {
             return ResponseEntity.ok().body(respuestaEstudianteService.guardar(respuestaEstudiante));
         } catch (Exception e) {
