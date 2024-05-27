@@ -10,4 +10,7 @@ public interface ExamenService {
     Examen guardar(Examen examen);
     Optional<Examen> buscarPorId(Long id);
     void eliminar(Long id);
+    List<Examen> buscarExamenPorGrupo(Long idGrupo);
+    List<Object[]> buscarExamenPorEstudiante(String idEstudiante);
+    List<Examen> buscarExamenPorProfesor(String idProfesor);
 }

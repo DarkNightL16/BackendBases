@@ -227,4 +227,14 @@ public class MateriasController {
         }
     }
 
+    @GetMapping("/buscarContenidoPorCurso")
+    public ResponseEntity<?> buscarContenidoPorCurso(@RequestBody Map<String, Object> cursoData) {
+        try {
+            Long id_curso = Long.parseLong((String)cursoData.get("id_curso"));
+            return ResponseEntity.ok().body(contenidoService.buscarContenidoPorCurso(id_curso));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
 }

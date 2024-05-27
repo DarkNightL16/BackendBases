@@ -10,4 +10,5 @@ public interface ContenidoService {
     Optional<Contenido> buscarPorId(Long id);
     List<Contenido> buscarTodos();
     void eliminarPorId(Long id);
+    List<Contenido> buscarContenidoPorCurso(Long id_curso);
 }

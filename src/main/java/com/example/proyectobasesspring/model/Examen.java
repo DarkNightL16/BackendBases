@@ -48,19 +48,19 @@ public class Examen {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_CONTENIDO", nullable = false)
-    @JsonIgnoreProperties("unidadesIdUnidad")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Contenido idContenido;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "PROFESORES_USUARIOS_ID_USUARIO", nullable = false)
-    @JsonIgnoreProperties("usuarios")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Profesor profesoresUsuariosIdUsuario;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "GRUPOS_ID_GRUPO", nullable = false)
-    @JsonIgnoreProperties("profesoresUsuariosIdUsuario")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Grupo gruposIdGrupo;
 
 }

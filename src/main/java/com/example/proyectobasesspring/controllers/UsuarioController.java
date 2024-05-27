@@ -107,18 +107,18 @@ public class UsuarioController {
     }
 
     @GetMapping("/buscarEstudiantePorId")
-    public ResponseEntity<?> buscarEstudiantePorId(@RequestBody Map<String, Object> userData) {
+    public ResponseEntity<?> buscarEstudiantePorId(@RequestParam String id_estudiante) {
         try {
-            return ResponseEntity.ok().body(estudianteService.buscarPorId(userData.get("id_estudiante").toString()));
+            return ResponseEntity.ok().body(estudianteService.buscarPorId(id_estudiante));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
     @GetMapping("/buscarProfesorPorId")
-    public ResponseEntity<?> buscarProfesorPorId(@RequestBody Map<String, Object> userData) {
+    public ResponseEntity<?> buscarProfesorPorId(@RequestParam String id_profesor) {
         try {
-            return ResponseEntity.ok().body(profesorService.buscarPorId(userData.get("id_profesor").toString()));
+            return ResponseEntity.ok().body(profesorService.buscarPorId(id_profesor));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -138,10 +138,10 @@ public class UsuarioController {
         }
     }
 
-    @GetMapping("/listarGruposPorProfesor")
-    public ResponseEntity<?> listarGruposPorProfesor(@RequestBody Map<String, Object> id_profesor) {
+    @GetMapping("/listarGruposPorProfesor/{id_profesor}")
+    public ResponseEntity<?> listarGruposPorProfesor(@PathVariable  String id_profesor) {
         try {
-            return ResponseEntity.ok().body(grupoService.listarGruposPorProfesor(id_profesor.get("id_profesor").toString()));
+            return ResponseEntity.ok().body(grupoService.listarGruposPorProfesor(id_profesor));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -198,10 +198,9 @@ public class UsuarioController {
         }
     }
 
-    @GetMapping("/buscarGrupoEstudiantePorId")
-    public ResponseEntity<?> buscarGrupoEstudiantePorId(@RequestBody Map<String, Object> grupoEstudianteData) {
+    @GetMapping("/listarGruposPorEstudiante/{id_estudiante}")
+    public ResponseEntity<?> buscarGrupoEstudiantePorId(@PathVariable String id_estudiante) {
         try {
-            String id_estudiante = (String) grupoEstudianteData.get("id_estudiante");
             return ResponseEntity.ok().body(grupoEstudianteService.listarGruposPorEstudiante(id_estudiante));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());

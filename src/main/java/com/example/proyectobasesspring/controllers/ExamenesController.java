@@ -354,4 +354,45 @@ public class ExamenesController {
         }
         return ResponseEntity.ok().body("Pregunta Estudiante eliminada");
     }
+
+    @GetMapping("/listarExamenesPorGrupo")
+    public ResponseEntity<?> listarExamenesPorGrupo(@RequestBody Map<String, Object> grupoData) {
+        try {
+            Long id_grupo = Long.parseLong((String)grupoData.get("id_grupo"));
+            return ResponseEntity.ok().body(examenService.buscarExamenPorGrupo(id_grupo));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/buscarExamenPorId")
+    public ResponseEntity<?> buscarExamenPorId(@RequestBody Map<String, Object> examenData) {
+        try {
+            Long id_examen = Long.parseLong((String)examenData.get("id_examen"));
+            return ResponseEntity.ok().body(examenService.buscarPorId(id_examen));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/buscarExamenesHistorial")
+    public ResponseEntity<?> buscarExamenesHistorial(@RequestBody Map<String, Object> historialData) {
+        try {
+            String id_estudiante = (String) historialData.get("id_estudiante");
+            return ResponseEntity.ok().body(examenService.buscarExamenPorEstudiante(id_estudiante));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/buscarExamenesPorProfesor")
+    public ResponseEntity<?> buscarExamenesPorProfesor(@RequestBody Map<String, Object> profesorData) {
+        try {
+            String id_profesor = (String) profesorData.get("id_profesor");
+            return ResponseEntity.ok().body(examenService.buscarExamenPorProfesor(id_profesor));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
 }

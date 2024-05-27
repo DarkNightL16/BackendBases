@@ -33,4 +33,10 @@ public class ContenidoServiceImpl implements ContenidoService {
     public void eliminarPorId(Long id) {
         contenidoRepository.deleteById(id);
     }
+
+    @Override
+    public List<Contenido> buscarContenidoPorCurso(Long id_curso) {
+        return contenidoRepository.buscarContenidoPorCurso(id_curso);
+    }
+
 }

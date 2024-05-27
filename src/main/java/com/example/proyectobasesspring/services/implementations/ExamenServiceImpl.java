@@ -33,4 +33,19 @@ public class ExamenServiceImpl implements ExamenService {
     public void eliminar(Long id) {
         examenRepository.deleteById(id);
     }
+
+    @Override
+    public List<Examen> buscarExamenPorGrupo(Long idGrupo) {
+        return examenRepository.buscarExamenPorGrupo(idGrupo);
+    }
+
+    @Override
+    public List<Object[]> buscarExamenPorEstudiante(String idEstudiante) {return examenRepository.buscarExamenPorEstudiante(idEstudiante);}
+
+    @Override
+    public List<Examen> buscarExamenPorProfesor(String idProfesor) {
+        return examenRepository.buscarExamenPorProfesor(idProfesor);
+    }
+
+
 }
