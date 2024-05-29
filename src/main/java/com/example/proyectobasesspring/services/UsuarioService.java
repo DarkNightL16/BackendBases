@@ -10,4 +10,5 @@ public interface UsuarioService {
     Usuario guardar(Usuario usuario);
     Optional<Usuario> buscarPorId(String id);
     public void eliminarPorId(String id);
+    Optional<Usuario> buscarPorIdYContrasena(String idUsuario, String contrasena);
 }

@@ -1,13 +1,32 @@
 package com.example.proyectobasesspring.controllers;
 
-import com.example.proyectobasesspring.model.*;
-import com.example.proyectobasesspring.services.implementations.*;
-import lombok.RequiredArgsConstructor;
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
+import com.example.proyectobasesspring.model.Estudiante;
+import com.example.proyectobasesspring.model.Grupo;
+import com.example.proyectobasesspring.model.GrupoEstudiante;
+import com.example.proyectobasesspring.model.GrupoEstudianteId;
+import com.example.proyectobasesspring.model.Profesor;
+import com.example.proyectobasesspring.model.Usuario;
+import com.example.proyectobasesspring.services.implementations.EstudianteServiceImpl;
+import com.example.proyectobasesspring.services.implementations.GrupoEstudianteServiceImpl;
+import com.example.proyectobasesspring.services.implementations.GrupoServiceImpl;
+import com.example.proyectobasesspring.services.implementations.ProfesorServiceImpl;
+import com.example.proyectobasesspring.services.implementations.TipoUsuarioServiceImpl;
+import com.example.proyectobasesspring.services.implementations.UsuarioServiceImpl;
+
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -87,6 +106,18 @@ public class UsuarioController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+@GetMapping("/buscarUsuarioPorIdYContraseña")
+public ResponseEntity<?> buscarUsuarioPorIdYContraseña(@RequestParam("id_usuario") String idUsuario, @RequestParam("contrasena") String contrasena) {
+        
+    try {
+        return ResponseEntity.ok().body(usuarioService.buscarPorIdYContrasena(idUsuario, contrasena));
+    } catch (Exception e) {
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
+}
+
+
 
     @GetMapping("/listarEstudiantes")
     public ResponseEntity<?> listarEstudiantes() {

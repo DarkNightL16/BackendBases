@@ -33,4 +33,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public void eliminarPorId(String id) { usuarioRepository.deleteById(id);}
+
+    @Override
+    public Optional<Usuario> buscarPorIdYContrasena(String idUsuario, String contrasena) {
+        return usuarioRepository.findByIdAndContrasena(idUsuario, contrasena);
+    }
 }
